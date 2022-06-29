@@ -1,0 +1,33 @@
+<html>
+   <head>
+      <title>Simple file manager</title>
+   </head>
+   <body>
+      <h2>Upload file</h2>
+      <form action = "/upload" method = "POST" 
+      enctype = "multipart/form-data">
+      Login:
+      <input name = "login"/>
+      <br>
+      Password:
+      <input type = "password" name = "password"/>
+      <br>
+      <input type = "file" name = "file"/>
+      <input type = "hidden" name="path" value="{{ dir_info.path }}" />
+      <input type = "submit"/>
+   </form>
+      <h2>Current directory: {{ dir_info.path }}</h2>
+
+      <a href="{{ dir_info.parentPath }}">Go back</a>
+
+      <h3>Files (dirs in bold):</h3>
+      <ol>
+      {%- for item in dir_info.dirs %}
+         <li><a href="{{ item.link }}"><b>{{ item.name }}</b></a></li>
+      {%- endfor %}
+      {%- for item in dir_info.files %}
+         <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+      {%- endfor %}
+      </ol>
+   </body>
+</html>
